@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Description, Detail, DetailTemplate, NftImg, Properties, DetailHead } from '../../components/detail';
+import { Description, Detail, DetailTemplate, NftImg, Properties, DetailHead, DetailWrapper } from '../../components/detail';
 
 const Wrapper = styled.div`
     position: relative;
@@ -38,18 +38,36 @@ const Wrapper = styled.div`
     }
 `;
 
-function DetailLayout() {
-    const owner = "0x0E7149cAB20d016291E8bc6F72580FE04CAE629e"
+const I = styled.i`    
+    margin-right: 10px;
+`
 
+function DetailLayout({ nftInfo }) {
     return (
         <Wrapper>
-            <NftImg />
+            <NftImg imageUrl={nftInfo.image} />
             <DetailTemplate>
-                <Detail />
+                <DetailWrapper
+                    icon={<I className="fa-solid fa-file-invoice" />}
+                    title={"Details"}
+                >
+                    <Detail nftInfo={nftInfo} />
+                </DetailWrapper>
             </DetailTemplate>
-            <DetailHead name={'test'} owner={owner} />
-            <Description />
-            <Properties />
+            <DetailHead name={nftInfo.name} owner={nftInfo.owner} />
+            <DetailTemplate>
+                <DetailWrapper title="Description">
+                    <Description description={nftInfo.description} />
+                </DetailWrapper>
+            </DetailTemplate>
+            <DetailTemplate>
+                <DetailWrapper
+                    icon={<I className="fa-solid fa-tag"></I>}
+                    title={"Properties"}
+                >
+                    <Properties properties={nftInfo.attributes} />
+                </DetailWrapper>
+            </DetailTemplate>
         </Wrapper>
     )
 }

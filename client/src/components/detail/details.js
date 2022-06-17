@@ -1,20 +1,15 @@
-import styled from 'styled-components';
+import Text from './Text'
 
-const Wrapper = styled.div`
-
-`;
-
-function Detail() {
+function Detail({ nftInfo }) {
+    const contractAddress = nftInfo.contract.slice(0, 6)+'…'+nftInfo.contract.slice(nftInfo.contract.length-3, nftInfo.contract.length-1);
     return (
-        <Wrapper className="text-align-left">
-            <h3>Details</h3>
-            <div>Contract Address</div>
-            <div>Token ID</div>
-            <div>Token Standard</div>
-            <div>Blockchain</div>
-            <div>Creator Fees</div>
-        </Wrapper>
-
+        <>
+            <Text leftData={'Contract Address'} rightData={contractAddress}></Text>
+            <Text leftData={'Token ID'} rightData={nftInfo.tokenId}></Text>
+            <Text leftData={'Token Standard'} rightData={nftInfo.standard}></Text>
+            <Text leftData={'Blockchain'} rightData={nftInfo.network}></Text>
+            <Text leftData={'Creator Fees'} rightData={`${Math.floor(Math.random() * 100)}%`}></Text>
+        </>
     )
 }
 

@@ -41,11 +41,11 @@ async function getNft(tokenId) {
     let owner = await contract.ownerOf(tokenId)
     let tokenURI =  await contract.tokenURI(tokenId)
     let network = await provider.getNetwork(1);
-    fetch("https://ipfs.io/ipfs/" + tokenURI.substr(7))
+    return fetch("https://ipfs.io/ipfs/" + tokenURI.substr(7))
     .then(res=> res.json())
     .then(out => {
-        let imagePath = "https://ipfs.io/ipfs/" + (out.image).substr(7)
-        let nftInfo = {
+        const imagePath = "https://ipfs.io/ipfs/" + (out.image).substr(7)
+        const nftInfo = {
             "owner": owner
             , "name": out.name
             , "image": imagePath
@@ -54,6 +54,7 @@ async function getNft(tokenId) {
             , "contract":  SEANAPSE_NFT_CONTRACT_ADDRESS
             , "standard": "ERC-721"
             , "network": network.name
+            , "tokenId": tokenId
         }
         return nftInfo
     })
