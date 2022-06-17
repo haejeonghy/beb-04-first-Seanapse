@@ -14,8 +14,6 @@ const StyledDiv = styled.div`
 
 function Gallery({nftlist, keyword, address}) {
 
-    console.log(`Gallery: nftlist: ${nftlist}, keyword: ${nftlist}, address: ${address}`)
-
     return (
         <StyledDiv>
             {nftlist.map((el,index) => {
